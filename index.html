@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find The Perfect Place To Go | Travel & Adventure</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & THEME --- */
+        :root {
+            --primary-cream: #FFFDF9;
+            --secondary-cream: #F7F4EB;
+            --accent-orange: #FF6B6B;
+            --accent-green: #25D366; /* WhatsApp Green */
+            --text-dark: #2B2D42;
+            --text-muted: #6C757D;
+            --card-shadow: 0 8px 24px rgba(139, 125, 110, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--primary-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--text-dark);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        header {
+            background-color: rgba(255, 253, 249, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 35px;
+            font-weight: 600;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        /* --- FLOATING CTA BUTTONS --- */
+        .cta-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--accent-green);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #20ba56;
+            transform: translateY(-3px);
+        }
+
+        .btn-phone {
+            background-color: white;
+            color: var(--text-dark);
+        }
+
+        .btn-phone:hover {
+            background-color: var(--secondary-cream);
+            transform: translateY(-3px);
+        }
+
+        /* --- MENU HIGHLIGHTS (EXPERIENCES) --- */
+        .menu-bg { background-color: var(--secondary-cream); }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-price {
+            color: var(--accent-orange);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* --- DAILY OFFERS --- */
+        .offers-banner {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(255, 142, 83, 0.9)),
+                        url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            border-radius: 30px;
+            padding: 50px;
+            color: white;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+        }
+
+        .offers-banner h2 { color: white; margin-bottom: 15px; }
+        .offers-banner p { font-size: 1.2rem; margin-bottom: 25px; }
+
+        /* --- PHOTO GALLERY --- */
+        .gallery-bg { background-color: var(--secondary-cream); }
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 15px;
+            height: 250px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* --- CUSTOMER REVIEWS --- */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: var(--secondary-cream);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-orange);
+        }
+
+        .stars { color: #FFD166; margin-bottom: 10px; }
+        .reviewer { font-weight: 700; margin-top: 15px; font-size: 0.9.rem; }
+
+        /* --- CONTACT & MAP SECTION --- */
+        .contact-bg { background-color: var(--secondary-cream); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E2E8F0;
+            border-radius: 10px;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent-orange);
+        }
+
+        .btn-submit {
+            background-color: var(--accent-orange);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            background-color: #e05656;
+        }
+
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            height: 100%;
+            min-height: 350px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p { opacity: 0.8; }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: var(--primary-cream);
+                padding: 20px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.3rem; }
+            .hero p { font-size: 1.1rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .offers-banner { padding: 30px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fa-solid fa-compass"></i> Perfect Place</a>
+            <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#menu-highlights">Highlights</a></li>
+                <li><a href="#daily-offers">Offers</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Find The Perfect Place To Go</h1>
+            <p>Tailored getaways and local hangouts perfect for Students, Families, and Adventurers alike.</p>
+            <div class="cta-group">
+                <a href="https://wa.me/918296680627?text=Hi!%20I%27d%20like%20to%20book%20a%20perfect%20place%20experience." class="btn btn-whatsapp" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Chat & Order via WhatsApp
+                </a>
+                <a href="tel:8296680627" class="btn btn-phone">
+                    <i class="fa-solid fa-phone"></i> Call 8296680627
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU HIGHLIGHTS -->
+    <section id="menu-highlights" class="menu-bg">
+        <h2 class="section-title">Our Curated Experiences</h2>
+        <p class="section-subtitle">Specially selected spots designed for every kind of explorer</p>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="card-content">
+                    <h3>Student Backpacker Trails</h3>
+                    <p>Budget-friendly spots, vibrant social hostels, and high-energy local spots close to nature.</p>
+                    <p class="card-price">Starting at ₹999/day</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="card-content">
+                    <h3>Family Weekend Retreats</h3>
+                    <p>Relaxing, safe, and activity-packed resorts ideal for peaceful family bonding and kids' fun.</p>
+                    <p class="card-price">Starting at ₹3,499/day</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="card-content">
+                    <h3>Local Residents Hidden Gems</h3>
+                    <p>Discover unique, uncrowded staycations and premium secret cafes right in your neighborhood.</p>
+                    <p class="card-price">Starting at ₹1,200/day</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DAILY OFFERS -->
+    <section id="daily-offers">
+        <div class="offers-banner">
+            <h2>🔥 Today's Special Offers! 🔥</h2>
+            <p>Flash Deal: Group bookings of 4+ get an instant 15% discount. Show your Student ID card for free extra amenities!</p>
+            <a href="https://wa.me/918296680627?text=I%20want%20to%20claim%20the%20Daily%20Offer!" class="btn btn-whatsapp" style="box-shadow: none;" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Claim This Offer Now
+            </a>
+        </div>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <section id="gallery" class="gallery-bg">
+        <h2 class="section-title">Breathtaking Destinations</h2>
+        <p class="section-subtitle">A glimpse of the beautiful landscapes awaiting your arrival</p>
+        <div class="grid-gallery">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=400&q=80" alt="Travel 1"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=400&q=80" alt="Travel 2"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=400&q=80" alt="Travel 3"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=400&q=80" alt="Travel 4"></div>
+        </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS -->
+    <section id="reviews">
+        <h2 class="section-title">What Our Travelers Say</h2>
+        <p class="section-subtitle">Real experiences shared by local residents and travelers</p>
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"The budget student trail was flawless. Highly recommended for colleges groups looking to enjoy without breaking the bank."</p>
+                <div class="reviewer">- Rohan S., University Student</div>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"Booking through WhatsApp was incredibly fast and seamless. Our weekend family resort stay was absolutely peaceful."</p>
+                <div class="reviewer">- The Sharma Family, Local Residents</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & LOCATION -->
+    <section id="contact" class="contact-bg">
+        <h2 class="section-title">Plan Your Next Move</h2>
+        <p class="section-subtitle">Drop us a line or drop by our central office</p>
+        <div class="contact-grid">
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We will reach out to you shortly.');">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="Your mobile number" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Destination/Style</label>
+                    <input type="text" placeholder="e.g., Family Retreat / Student Trek">
+                </div>
+                <div class="form-group">
+                    <label>Your Message</label>
+                    <textarea rows="4" placeholder="Tell us how we can help you find your perfect place..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Enquiry</button>
+            </form>
+            <div class="map-container">
+                <!-- Interactive Embed OpenStreetMap (Privacy & Fast Loading Friendly alternative to Google maps) -->
+                <iframe width="100%" height="100%" frameborder="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Bengaluru,India+(Find%20The%20Perfect%20Place)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Find The Perfect Place To Go. All Rights Reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">Contact: <a href="tel:8296680627" style="color:white; text-decoration:none; font-weight:bold;">8296680627</a></p>
+    </footer>
+
+    <!-- RESPONSIVE NAVBAR SCRIPT -->
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu automatically on link click (for mobile experience)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
